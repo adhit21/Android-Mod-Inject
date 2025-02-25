@@ -4,7 +4,8 @@ import subprocess, requests, shutil, re, sys, os, time
 from os import get_terminal_size
 
 # Versi aplikasi
-version = "1.5.7"
+os.system('clear')
+version = "1.0.0"
 
 # ANSI Warna
 c1 = "\033[1;32m"  # Hijau terang  
