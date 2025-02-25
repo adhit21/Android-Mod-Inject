@@ -3,9 +3,10 @@
 import subprocess, requests, shutil, re, sys, os, time
 from os import get_terminal_size
 
-# Versi aplikasi
 os.system('clear')
-version = "1.0.0"
+
+# Versi aplikasi
+version = "1.5.7"
 
 # ANSI Warna
 c1 = "\033[1;32m"  # Hijau terang  
@@ -27,20 +28,20 @@ def loading_animation(text="Loading"):
             time.sleep(0.5)
     print("\r")  # Clear line
 
-# Cek izin penyimpanan di Termux
+
 if not os.path.isdir(os.path.expanduser('~/storage')):
     print(f"\n{c4}Please grant permission via command:{c2}")
     print(f"{c6}termux-setup-storage{c2}\n")
     exit()
 
-# Cek jika ingin update langsung
+
 if 'u' in sys.argv or 'update' in sys.argv:
     print(f"{c6}Updating MiTool...{c2}")
     loading_animation("Downloading")
     subprocess.run("curl -s https://raw.githubusercontent.com/offici5l/MiTool/master/install.sh | bash", shell=True)
     exit()
 
-# Cek versi terbaru dari GitHub
+
 try:
     print(f"{c6}Checking for updates...{c2}")
     loading_animation("Checking")
@@ -85,13 +86,13 @@ while True:
 {c7}╔════════════════════════════════════════╗
 {c7}║  {c8}⚡ {c6}MiTool Main Menu {c8}⚡                {c7}║
 {c7}╠════════════════════════════════════════╣
-{c7}║ {c1}1{c2} ➤ {c5}Unlock Bootloader                {c7}║
-{c7}║ {c1}2{c2} ➤ {c5}Flash Fastboot ROM               {c7}║
-{c7}║ {c1}3{c2} ➤ {c5}Flash Zip (Sideload)             {c7}║
-{c7}║ {c1}4{c2} ➤ {c5}Bypass                           {c7}║
-{c7}║ {c1}5{c2} ➤ {c5}Mi Assistant                     {c7}║
-{c7}║ {c1}6{c2} ➤ {c5}Firmware Content Extractor      {c7}║
-{c7}║ {c4}exit{c2} ➤ {c5}Keluar dari program          {c7}║
+{c7}║ {c1}1{c2} ➤ {c5}Unlock Bootloader                  {c7}║
+{c7}║ {c1}2{c2} ➤ {c5}Flash Fastboot ROM                 {c7}║
+{c7}║ {c1}3{c2} ➤ {c5}Flash Zip (Sideload)               {c7}║
+{c7}║ {c1}4{c2} ➤ {c5}Bypass                             {c7}║
+{c7}║ {c1}5{c2} ➤ {c5}Mi Assistant                       {c7}║
+{c7}║ {c1}6{c2} ➤ {c5}Firmware Content Extractor         {c7}║
+{c7}║ {c4}exit{c2} ➤ {c5}Keluar dari program             {c7}║
 {c7}╚════════════════════════════════════════╝
 """
     print(menu)
