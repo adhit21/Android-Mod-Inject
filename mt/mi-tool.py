@@ -1,12 +1,14 @@
 #!/usr/bin/python
 
+version = "1.1.0"
+
 import subprocess, requests, shutil, re, sys, os, time
 from os import get_terminal_size
 
 os.system('clear')
 
 
-version = "1.1.0"
+
 
 
 c1 = "\033[1;32m"
