@@ -39,14 +39,14 @@ if not os.path.isdir(os.path.expanduser('~/storage')):
 if 'u' in sys.argv or 'update' in sys.argv:
     print(f"{c6}Updating MiTool...{c2}")
     loading_animation("Downloading")
-    subprocess.run("curl -s https://raw.githubusercontent.com/offici5l/MiTool/master/install.sh | bash", shell=True)
+    subprocess.run("curl -s https://raw.githubusercontent.com/adhit21/mi-tool/main/install.sh | bash", shell=True)
     exit()
 
 try:
     print(f"{c6}Checking for updates...{c2}")
     loading_animation("Checking")
 
-    response = requests.get("https://raw.githubusercontent.com/offici5l/MiTool/master/MT/mitool.py", timeout=3)
+    response = requests.get("https://raw.githubusercontent.com/adhit21/Android-Mod-Inject/master/mt/mi-tool.py", timeout=3)
     response.raise_for_status()
 
     if response.status_code == 200:
@@ -57,7 +57,7 @@ try:
                 print(f"\n{c5}An update is available!{c2}")
                 print(f"Updating from {c1}{version}{c2} to {c1}{vcloud}{c2} ...")
                 loading_animation("Downloading update")
-                subprocess.run("curl -s https://raw.githubusercontent.com/offici5l/MiTool/master/install.sh | bash", shell=True)
+                subprocess.run("curl -s https://raw.githubusercontent.com/adhit21/mi-tool/main/install.sh | bash", shell=True)
                 exit()
 except requests.exceptions.ConnectionError:
     print(f"{c4}No internet connection! Skipping update check.{c2}")
@@ -115,7 +115,7 @@ while True:
     elif choice in ["u", "update"]:
         print(f"{c6}Updating MiTool...{c2}")
         loading_animation("Downloading")
-        subprocess.run("curl -s https://raw.githubusercontent.com/offici5l/MiTool/master/install.sh | bash", shell=True)
+        subprocess.run("curl -s https://raw.githubusercontent.com/adhit21/mi-tool/main/install.sh | bash", shell=True)
         exit()
     elif choice == "exit":
         print(f"{c5}Exiting MiTool...{c2}")
