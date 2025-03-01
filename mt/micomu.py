@@ -21,14 +21,14 @@ version = "1.0"
 
 print(f"\n[V{version}] For issues or feedback:\n- Telegram: https://t.me/ThianzzzID\n")
 
-User = "offici5l/MiCommunityTool"
+User = "adhit/Micomunity"
 headers = {"User-Agent": User}
 
 def login():
     base_url = "https://account.xiaomi.com"
     sid = "18n_bbs_global"
 
-    user = input('\nEnter user: ')
+    user = input('\nEnter Xiaomi id or email: ')
     pwd = input('\nEnter pwd: ')
     hash_pwd = hashlib.md5(pwd.encode()).hexdigest().upper()
     cookies = {}
