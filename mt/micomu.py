@@ -57,7 +57,7 @@ def get_login_data():
     save_login_data(user, pwd)
     return user, pwd
 
-print(f"\n[V{version}] For issues or feedback:\n- Telegram: t.me/Offici5l_Group\n")
+print(f"\n[V{version}] For issues or feedback:\n- Telegram: t.me/ThianzzzID\n")
 
 
 user, pwd = get_login_data()
