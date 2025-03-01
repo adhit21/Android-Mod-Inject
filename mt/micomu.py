@@ -52,8 +52,8 @@ def get_login_data():
             delete_login_data()
             print("\nLogin data deleted. Please enter new credentials.")
 
-    user = input('\nEnter user: ')
-    pwd = input('\nEnter pwd: ')
+    user = input('\nEnter User id or Email: ')
+    pwd = input('\nEnter pasword: ')
     save_login_data(user, pwd)
     return user, pwd
 
