@@ -7,41 +7,52 @@ print(f"\033[H\033[J")
 
 RESET = "\033[0m"
 GREEN = "\033[1;32m"
+YELLOW = "\033[1;33m"
 GRAY = "\033[1;30m"
+CYAN = "\033[1;36m"
 
 terminal_width = shutil.get_terminal_size().columns
 
-print(f"""
-{GRAY}━{'━' * (terminal_width - 2)}━
-- {GREEN}fastboot{RESET}{GRAY} and {GREEN}adb {GRAY}commands can be used in the terminal.
-{GRAY}━{'━' * (terminal_width - 2)}━
-- Mi-Tool is automatically updated when a new version is available, but you can do this manually by: {GREEN}mi-tool u{RESET}
-{GRAY}━{'━' * (terminal_width - 2)}━
-Mi-tool shortcuts commands:
-Unlock-Bootloader = {GREEN}miunlock{RESET}{GRAY}
-Flash-Fastboot-ROM = {GREEN}miflashf{RESET}{GRAY}
-Flash-Zip-With-Sideload = {GREEN}miflashs{RESET}{GRAY}
-Bypass = {GREEN}mibypass{RESET}{GRAY}
-Mi-Assistant = {GREEN}miasst{RESET}{GRAY}
-Firmware-Content-Extractor = {GREEN}mifce{RESET}{GRAY}
-Help = {GREEN}mihelp{RESET}
-{GRAY}━{'━' * (terminal_width - 2)}━
-To report issues or share feedback, visit:    
-- Telegram : https://t.me/+62895331944545
-{GRAY}━{'━' * (terminal_width - 2)}━
-{GRAY}⚙️{'⚙️' * (terminal_width - 2)}⚙️
-""")
+def print_line():
+    print(f"{GRAY}{'━' * terminal_width}{RESET}")
+
+print_line()
+print(f"{CYAN}{'MiTool - Help & Guide'.center(terminal_width)}{RESET}")
+print_line()
+
+menu = [
+    ("Cek Device Info", "➤ checking device info"),
+    ("Unlock Bootloader", "➤ to unlock bootloader"),
+    ("Request Unlock Bootloader", "➤ request unlock permission"),
+    ("Flash Fastboot ROM", "➤ flashing ROM via fastboot"),
+    ("Flash Zip (Sideload)", "➤ flashing zip via sideload"),
+    ("Bypass", "➤ bypass Mi Account"),
+    ("Mi Assistant", "➤ enter Mi Assistant mode"),
+    ("Firmware Content Extractor", "➤ extract firmware contents"),
+    ("ADB & FASTBOOT Helper", "➤ quick ADB & Fastboot tools"),
+    ("Exit MiTool", "➤ exit the tool")
+]
+
+for item in menu:
+    feature, description = item
+    print(f"{CYAN}{feature.ljust(35)} {GRAY}{description}{RESET}")
+
+print_line()
 
 print(f"""
+{CYAN}MiTool Shortcuts:{RESET}
+- To update manually: {GREEN}mi-tool u{RESET}
+- For help anytime: {GREEN}mihelp{RESET}
 
-{'━' * os.get_terminal_size().columns}\n{'Lock 🔒 Bootloader'.center(os.get_terminal_size().columns)}
+{CYAN}Notes:{RESET}
+- Make sure your device is in {YELLOW}Fastboot Mode{RESET} or {YELLOW}Recovery Mode{RESET} when performing specific operations.
+- Always backup important data before flashing or unlocking.
 
-Method 1:
-Flash-Fastboot-ROM ↓
-Flash all with lock bootloader
-
-Method 2:
-Before starting the process, ensure that the partitions are clean. If you have previously rooted your device, flash the clean boot.img. If any modifications have been made to any partition, flash the clean partition to avoid potential issues in the future.
-To lock the bootloader, type: {GREEN}fastboot oem lock{RESET}{GRAY}
-
+{CYAN}Contact & Feedback:{RESET}
+- Telegram: https://t.me/+62895331944545
 """)
+
+print_line()
+
+# Tambahkan fitur tekan enter agar tidak langsung keluar
+input(f"\n{YELLOW}Press Enter to exit...{RESET}")
