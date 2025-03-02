@@ -1,3 +1,6 @@
+#!/usr/bin/python
+
+
 import subprocess
 import json
 
@@ -34,7 +37,7 @@ def get_usb_device_path():
 def run_usbtest(device_path):
     try:
         
-        subprocess.run(['termux-usb', '-r', '-e', './usbtest', device_path])
+        subprocess.run(f'termux-usb -r -e /usr/bin/mi-usb {device_path}', shell=True)
     except Exception as e:
         print(f"{RED}Error running usbtest: {e}{RESET}")
 
