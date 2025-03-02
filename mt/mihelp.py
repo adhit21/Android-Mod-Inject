@@ -15,9 +15,9 @@ print(f"""
 {GRAY}━{'━' * (terminal_width - 2)}━
 - {GREEN}fastboot{RESET}{GRAY} and {GREEN}adb {GRAY}commands can be used in the terminal.
 {GRAY}━{'━' * (terminal_width - 2)}━
-- MiTool is automatically updated when a new version is available, but you can do this manually by: {GREEN}mitool u{RESET}
+- Mi-Tool is automatically updated when a new version is available, but you can do this manually by: {GREEN}mi-tool u{RESET}
 {GRAY}━{'━' * (terminal_width - 2)}━
-Mitool shortcuts commands:
+Mi-tool shortcuts commands:
 Unlock-Bootloader = {GREEN}miunlock{RESET}{GRAY}
 Flash-Fastboot-ROM = {GREEN}miflashf{RESET}{GRAY}
 Flash-Zip-With-Sideload = {GREEN}miflashs{RESET}{GRAY}
