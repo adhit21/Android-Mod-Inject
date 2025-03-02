@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-version = "1.2.0"
+version = "1.2.1"
 
 import subprocess, requests, shutil, re, sys, os, time
 from os import get_terminal_size
@@ -87,7 +87,8 @@ while True:
 {c7}║ {c1}6{c2} ➤ {c5}Bypass                             {c7}║
 {c7}║ {c1}7{c2} ➤ {c5}Mi Assistant                       {c7}║
 {c7}║ {c1}8{c2} ➤ {c5}Firmware Content Extractor         {c7}║
-{c7}║ {c4}9{c2} ➤ {c5}Exit                               {c7}║
+{c7}║ {c1}9{c2} ➤ {c5}ADB & FASTBOOT Helper              {c7}║
+{c7}║ {c4}10{c2} ➤ {c5}Exit                              {c7}║
 {c7}╚════════════════════════════════════════╝
 """
     print(menu)
@@ -113,6 +114,8 @@ while True:
     elif choice == "8":
         subprocess.run("$PREFIX/bin/mifce", shell=True)
     elif choice == "9":
+        subprocess.run("$PREFIX/bin/mi-fastboot-h", shell=True)
+    elif choice == "10":
         print(f"{c5}Exiting MiTool...{c2}")
         loading_animation("Closing")
         exit()
