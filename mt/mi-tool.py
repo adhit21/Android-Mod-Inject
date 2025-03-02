@@ -7,7 +7,6 @@ from os import get_terminal_size
 
 os.system('clear')
 
-
 c1 = "\033[1;32m"
 c2 = "\033[0m"
 c3 = "\033[1;34m"
@@ -18,7 +17,6 @@ c7 = "\033[1;35m"
 c8 = "\033[1;37m"
 bold = "\033[1m"
 
-
 def loading_animation(text="Loading"):
     bar_length = 30
     for i in range(bar_length + 1):
@@ -28,7 +26,6 @@ def loading_animation(text="Loading"):
         sys.stdout.flush()
         time.sleep(0.1)
     print("")
-
 
 if not os.path.isdir(os.path.expanduser('~/storage')):
     print(f"\n{c4}Please grant permission via command:{c2}")
@@ -82,14 +79,15 @@ while True:
 {c7}╔════════════════════════════════════════╗
 {c7}║  {c8}⚡ {c6}MiTool Main Menu {c8}⚡                {c7}║
 {c7}╠════════════════════════════════════════╣
-{c7}║ {c1}1{c2} ➤ {c5}Unlock Bootloader                  {c7}║
-{c7}║ {c1}2{c2} ➤ {c5}Request Unlock Bootloader          {c7}║
-{c7}║ {c1}3{c2} ➤ {c5}Flash Fastboot ROM                 {c7}║
-{c7}║ {c1}4{c2} ➤ {c5}Flash Zip (Sideload)               {c7}║
-{c7}║ {c1}5{c2} ➤ {c5}Bypass                             {c7}║
-{c7}║ {c1}6{c2} ➤ {c5}Mi Assistant                       {c7}║
-{c7}║ {c1}7{c2} ➤ {c5}Firmware Content Extractor         {c7}║
-{c7}║ {c4}8{c2} ➤ {c5}Exit                               {c7}║
+{c7}║ {c1}1{c2} ➤ {c5}Cek Device Info                    {c7}║
+{c7}║ {c1}2{c2} ➤ {c5}Unlock Bootloader                  {c7}║
+{c7}║ {c1}3{c2} ➤ {c5}Request Unlock Bootloader          {c7}║
+{c7}║ {c1}4{c2} ➤ {c5}Flash Fastboot ROM                 {c7}║
+{c7}║ {c1}5{c2} ➤ {c5}Flash Zip (Sideload)               {c7}║
+{c7}║ {c1}6{c2} ➤ {c5}Bypass                             {c7}║
+{c7}║ {c1}7{c2} ➤ {c5}Mi Assistant                       {c7}║
+{c7}║ {c1}8{c2} ➤ {c5}Firmware Content Extractor         {c7}║
+{c7}║ {c4}9{c2} ➤ {c5}Exit                               {c7}║
 {c7}╚════════════════════════════════════════╝
 """
     print(menu)
@@ -99,29 +97,31 @@ while True:
     choice = input().strip().lower()
 
     if choice == "1":
-        subprocess.run("$PREFIX/bin/miunlock", shell=True)
+        subprocess.run("$PREFIX/bin/mi-ck", shell=True)
     elif choice == "2":
-        subprocess.run("$PREFIX/bin/micomu", shell=True)  # Executes request unlock bootloader
+        subprocess.run("$PREFIX/bin/miunlock", shell=True)
     elif choice == "3":
-        subprocess.run("$PREFIX/bin/miflashf", shell=True)
+        subprocess.run("$PREFIX/bin/micomu", shell=True)
     elif choice == "4":
-        subprocess.run("$PREFIX/bin/miflashs", shell=True)
+        subprocess.run("$PREFIX/bin/miflashf", shell=True)
     elif choice == "5":
-        subprocess.run("$PREFIX/bin/mibypass", shell=True)
+        subprocess.run("$PREFIX/bin/miflashs", shell=True)
     elif choice == "6":
-        subprocess.run("$PREFIX/bin/miasst", shell=True)
+        subprocess.run("$PREFIX/bin/mibypass", shell=True)
     elif choice == "7":
+        subprocess.run("$PREFIX/bin/miasst", shell=True)
+    elif choice == "8":
         subprocess.run("$PREFIX/bin/mifce", shell=True)
+    elif choice == "9":
+        print(f"{c5}Exiting MiTool...{c2}")
+        loading_animation("Closing")
+        exit()
     elif choice in ["h", "help"]:
         subprocess.run("$PREFIX/bin/mihelp", shell=True)
     elif choice in ["u", "update"]:
         print(f"{c6}Updating MiTool...{c2}")
         loading_animation("Downloading")
         subprocess.run("curl -s https://raw.githubusercontent.com/adhit21/mi-tool/main/install.sh | bash", shell=True)
-        exit()
-    elif choice == "8":
-        print(f"{c5}Exiting MiTool...{c2}")
-        loading_animation("Closing")
         exit()
     else:
         for i in range(3):
