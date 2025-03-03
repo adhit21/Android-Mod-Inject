@@ -2,14 +2,32 @@
 
 import subprocess
 import time
+import sys
 
-for i, choice in enumerate(["Read Info", "ROMs that can be flashed", "Flash Official Recovery ROM", "Format Data", "Reboot"], start=1):
+def exit_main_menu():
+    print("\nExiting Main Menu...\n")
+    time.sleep(1)
+    sys.exit(0)
+
+menu_choices = [
+    "Read Info",
+    "ROMs that can be flashed",
+    "Flash Official Recovery ROM",
+    "Format Data",
+    "Reboot",
+    "Exit Main Menu"
+]
+
+for i, choice in enumerate(menu_choices, start=1):
     print(f"\n\033[0;32m{i}\033[0m => {choice}")
 
 while True:
     choice = input("\nEnter your \033[0;32mchoice\033[0m: ")
-    if choice.isdigit() and 1 <= int(choice) <= 5:
+    
+    if choice.isdigit() and 1 <= int(choice) <= 6:
         print("\n")
+        if int(choice) == 6:
+            exit_main_menu()
         break
     print("\nInvalid choice !\n")
 
