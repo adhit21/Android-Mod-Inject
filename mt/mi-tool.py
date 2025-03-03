@@ -1,9 +1,10 @@
 #!/usr/bin/python
 
-version = "1.2.1"
+version = "1.2.2"
 
 import subprocess, requests, shutil, re, sys, os, time
 from os import get_terminal_size
+from datetime import datetime
 
 os.system('clear')
 
@@ -60,42 +61,41 @@ except requests.exceptions.ConnectionError:
 except requests.exceptions.Timeout:
     print(f"{c4}Update check timed out!{c2}")
 
-while True:
-    _l = c1 + "═" * 56 + c2
-    print(_l)
+os.system('clear')
 
+def show_header():
+    now = datetime.now()
+    date_str = now.strftime("%A, %d %B %Y")
+    time_str = now.strftime("%H:%M")
+
+    print(c1 + "=" * 56 + c2)
     ver = f"{c6}MiTool {bold}{version}{c2}"
-    b = '━' * (len(ver) + 4)
-    p = ' ' * ((get_terminal_size().columns - len(b)) // 2)
+    print(f"{c6}📅 {date_str}  ⏰ {time_str}{c2}")
+    print(f"{c5}MiTool Version: {ver}{c2}")
+    print(f"{c5}Author: adhit21{c2}")
+    print(f"{c3}Type 'help' for guide!{c2}\n")
 
-    furl = f"""
-{p}{c5}┏{b}┓{c2}
-{p}{c5}┃  {ver}  ┃{c2}
-{p}{c5}┛{b}┛{c2}
-"""
-    print(furl + f" ━ {c3}Type 'help' for guide!{c2}")
+while True:
+    show_header()
 
     menu = f"""
-{c7}╔════════════════════════════════════════╗
-{c7}║  {c8}⚡ {c6}MiTool Main Menu {c8}⚡                {c7}║
-{c7}╠════════════════════════════════════════╣
-{c7}║ {c1}1{c2} ➤ {c5}Cek Device Info                    {c7}║
-{c7}║ {c1}2{c2} ➤ {c5}Unlock Bootloader                  {c7}║
-{c7}║ {c1}3{c2} ➤ {c5}Request Unlock Bootloader          {c7}║
-{c7}║ {c1}4{c2} ➤ {c5}Flash Fastboot ROM                 {c7}║
-{c7}║ {c1}5{c2} ➤ {c5}Flash Zip (Sideload)               {c7}║
-{c7}║ {c1}6{c2} ➤ {c5}Bypass                             {c7}║
-{c7}║ {c1}7{c2} ➤ {c5}Mi Assistant                       {c7}║
-{c7}║ {c1}8{c2} ➤ {c5}Firmware Content Extractor         {c7}║
-{c7}║ {c1}9{c2} ➤ {c5}ADB & FASTBOOT Helper              {c7}║
-{c7}║ {c4}10{c2} ➤ {c5}Exit                              {c7}║
-{c7}╚════════════════════════════════════════╝
+{c5}1. {c5}Cek Device Info
+2. {c5}Unlock Bootloader
+3. {c5}Request Unlock Bootloader
+4. {c5}Flash Fastboot ROM
+5. {c5}Flash Zip (Sideload)
+6. {c5}Bypass
+7. {c5}Mi Assistant
+8. {c5}Firmware Content Extractor
+9. {c5}ADB & FASTBOOT Helper
+10. {c5}Exit
 """
+    os.system('clear')
+    show_header()
     print(menu)
+    
 
-    sys.stdout.write(f'{c4}Enter your {c1}choice{c2}: ')
-    sys.stdout.flush()
-    choice = input().strip().lower()
+    choice = input(f'{c4}Enter your choice(number): {c2}').strip().lower()
 
     if choice == "1":
         subprocess.run("$PREFIX/bin/mi-ck", shell=True)
@@ -132,3 +132,4 @@ while True:
             sys.stdout.flush()
             time.sleep(0.5)
         print(f"\r{c4}Invalid choice! Please enter a valid option.{c2}\n")
+        
