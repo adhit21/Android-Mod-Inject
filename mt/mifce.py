@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
-import requests
+import requests, os
 
+os.system('clear')
 print("\n\033[1;36m\nGet file.img from a ROM without downloading the ROM!\n")
 print("*Firmware-Content-Extractor* is here to help:\n")
 print("➤ Step 1: Analyzes the ROM on external servers")
@@ -10,13 +11,17 @@ print("\n✨ **Saving both data and time** by avoiding the download of large ROM
 
 c1="\033[1;32m"
 c2="\033[0m"
+c4 = "\033[1;31m"
 
 while True:
 
+    
+    
+    
     print("\nGet:\n")
     print(f"  ━ {c1}1{c2} boot.img")
     print(f"  ━ {c1}2{c2} init_boot.img")
-
+    print(f"\n\n  ━ {c4}ctrl+d to exit main menu{c2}")
     choice = input(f"\nEnter your {c1}choice{c2}: ").strip()
 
     option_map = {"1": "boot_img", "2": "init_boot_img"}
