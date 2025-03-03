@@ -58,7 +58,7 @@ def get_login_data():
     return user, pwd
 
 # Menampilkan versi dan informasi
-print(f"\n[V{version}] For issues or feedback:\n- GitHub: github.com/offici5l/MiCommunityTool/issues\n- Telegram: t.me/Offici5l_Group\n")
+print(f"\n[V{version}] For issues or feedback:\n- GitHub: github.com/adhit21/mi-tool\n- Telegram: t.me/ThianzzzID\n")
 
 # Ambil data login
 user, pwd = get_login_data()
