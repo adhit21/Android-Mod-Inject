@@ -53,7 +53,7 @@ def main():
         print("║ 3 ➤ Fastboot Reboot                   ║")
         print("║ 4 ➤ Fastboot Reboot to Recovery       ║")
         print("║ 5 ➤ Fix DM-Verity Corruption          ║")
-        print("║ 6 ➤ Exit                              ║")
+        print("║ 6 ➤ Exit to main menu                 ║")
         print("╚══════════════════════════════════════╝")
         
         choice = input(f"\n{c4}Enter options: {c2}").strip()
