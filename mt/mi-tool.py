@@ -118,6 +118,7 @@ while True:
     elif choice == "10":
         print(f"{c5}Exiting MiTool...{c2}")
         loading_animation("Closing")
+        os.system('clear')
         exit()
     elif choice in ["h", "help"]:
         subprocess.run("$PREFIX/bin/mihelp", shell=True)
