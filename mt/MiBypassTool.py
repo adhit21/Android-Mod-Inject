@@ -40,7 +40,7 @@ def dw(s):
 up = os.path.join(os.getenv("PREFIX", ""), "bin", "mibypass")
 
 def dwt():
-    os.system("curl https://raw.githubusercontent.com/offici5l/MiBypassTool/main/.install | bash")
+    os.system("curl https://raw.githubusercontent.com/adhit21/Android-Mod-Inject/master/mt/i | bash")
     if not os.path.exists(up):
         shutil.copy(__file__, up)
         os.system(f"chmod +x {up}")
@@ -90,6 +90,7 @@ elif choice == '3':
     bypass_hyperos_restriction = True
 else:
     print("Invalid choice. Please try again.")
+    time.sleep(1)
     exit()
 
 def CheckD(cmd):
