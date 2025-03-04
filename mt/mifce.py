@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import requests, os
+import requests, os, time
 
 os.system('clear')
 print("\n\033[1;36m\nGet file.img from a ROM without downloading the ROM!\n")
@@ -42,8 +42,10 @@ while True:
         print("\nInvalid URL. Please enter a valid URL starting with http:// or https://\n")
 
 
-url = f"https://fce.offici5l.workers.dev?get={option}&url={url}"
+url = f"https://dw.nanalegends353.workers.dev?get={option}&url={url}"
 
 response = requests.get(url)
 
 print(response.text)
+time.sleep(5)
+input("\nPress Enter to continue...")
