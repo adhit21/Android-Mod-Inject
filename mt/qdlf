@@ -1,0 +1,113 @@
+#!/usr/bin/python
+
+
+
+import os
+import subprocess
+
+RAW_FOLDER = "/storage/emulated/0/raw"
+
+
+RED = "\033[31m"
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+BLUE = "\033[34m"
+CYAN = "\033[36m"
+PURPLE = "\033[35m"
+RESET = "\033[0m"
+
+
+os.system("clear")
+
+
+if not os.path.exists(RAW_FOLDER):
+    print(f"{YELLOW}⚠️  'raw' folder not found. Creating folder...{RESET}")
+    os.makedirs(RAW_FOLDER)
+    print(f"{GREEN}✅ 'raw' folder successfully created at {RAW_FOLDER}{RESET}")
+
+print(f"{CYAN}==================================================={RESET}")
+print(f"{CYAN}HINT: Please extract the firmware into the 'raw' folder{RESET}")
+print(f"{CYAN}      in internal storage before proceeding.{RESET}")
+print(f"{CYAN}      (Location: {RAW_FOLDER}){RESET}")
+print(f"{CYAN}==================================================={RESET}")
+
+def list_files(extension):
+    """List all files with a given extension in the 'raw' folder."""
+    return [f for f in os.listdir(RAW_FOLDER) if f.lower().endswith(extension)]
+
+def select_file(files, description):
+    """Prompt user to select a file from a list."""
+    while True:
+        print(f"{BLUE}Select a {description}:{RESET}")
+        for i, file in enumerate(files, start=1):
+            print(f"{CYAN}{i}. {file}{RESET}")
+        choice = input("Enter the file number: ").strip()
+        if choice.isdigit() and 1 <= int(choice) <= len(files):
+            return os.path.join(RAW_FOLDER, files[int(choice) - 1])
+        else:
+            print(f"{YELLOW}⚠️  Invalid selection! Please try again.{RESET}")
+
+while True:
+    print(f"{PURPLE}======================================{RESET}")
+    print(f"{PURPLE}  ⚡ QDL Flashing Script for Termux ⚡ {RESET}")
+    print(f"{PURPLE}======================================{RESET}")
+    print(f"{BLUE}1. Flash eMMC{RESET}")
+    print(f"{BLUE}2. Flash UFS{RESET}")
+    print(f"{BLUE}3. Exit{RESET}")
+    print(f"{PURPLE}======================================{RESET}")
+    
+    option = input("Select an option (1/2/3): ").strip()
+
+    if option in ["1", "2"]:
+        break
+    elif option == "3":
+        print(f"{CYAN}🔹 Exiting...{RESET}")
+        input("Press Enter to exit...")
+        exit(0)
+    else:
+        print(f"{YELLOW}⚠️  Invalid selection! Please try again.{RESET}")
+
+# Select firehose file
+mbn_files = list_files(".mbn")
+if not mbn_files:
+    print(f"{RED}❌ No .mbn file found in the 'raw' folder!{RESET}")
+    input("Press Enter to exit...")
+    exit(1)
+firehose_file = select_file(mbn_files, "firehose file (.mbn)")
+
+# Select rawprogram.xml file
+rawprogram_files = list_files(".xml")
+rawprogram_files = [f for f in rawprogram_files if "rawprogram" in f.lower()]
+if not rawprogram_files:
+    print(f"{RED}❌ No rawprogram.xml file found in the 'raw' folder!{RESET}")
+    input("Press Enter to exit...")
+    exit(1)
+rawprogram_file = select_file(rawprogram_files, "rawprogram.xml file")
+
+# Select patch.xml file
+patch_files = list_files(".xml")
+patch_files = [f for f in patch_files if "patch" in f.lower()]
+if not patch_files:
+    print(f"{RED}❌ No patch.xml file found in the 'raw' folder!{RESET}")
+    input("Press Enter to exit...")
+    exit(1)
+patch_file = select_file(patch_files, "patch.xml file")
+
+# Execute flashing command
+if option == "1":
+    print(f"{GREEN}[INFO] Flashing eMMC with QDL...{RESET}")
+    flash_command = ["./qdl", "--debug", "--storage", "emmc", "--include", firehose_file, rawprogram_file, patch_file]
+else:
+    print(f"{GREEN}[INFO] Flashing UFS with QDL...{RESET}")
+    flash_command = ["./qdl", "--debug", "--storage", "ufs", "--include", firehose_file, rawprogram_file, patch_file]
+
+try:
+    flash_result = subprocess.run(flash_command, capture_output=True, text=True)
+    if "no usb device found" in flash_result.stdout.lower():
+        print(f"{RED}❌ Flashing failed, please try again.{RESET}")
+    else:
+        print(f"{GREEN}✅ Flashing completed!{RESET}")
+except Exception as e:
+    print(f"{RED}❌ Error executing QDL: {e}{RESET}")
+
+input("Press Enter to exit...")
