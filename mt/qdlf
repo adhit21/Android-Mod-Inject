@@ -1,12 +1,9 @@
 #!/usr/bin/python
 
-
-
 import os
 import subprocess
 
 RAW_FOLDER = "/storage/emulated/0/raw"
-
 
 RED = "\033[31m"
 GREEN = "\033[32m"
@@ -16,20 +13,18 @@ CYAN = "\033[36m"
 PURPLE = "\033[35m"
 RESET = "\033[0m"
 
-
 os.system("clear")
 
-
 if not os.path.exists(RAW_FOLDER):
-    print(f"{YELLOW}⚠️  'raw' folder not found. Creating folder...{RESET}")
+    print(f"\n{YELLOW}⚠️  'raw' folder not found. Creating folder...{RESET}\n")
     os.makedirs(RAW_FOLDER)
-    print(f"{GREEN}✅ 'raw' folder successfully created at {RAW_FOLDER}{RESET}")
+    print(f"{GREEN}✅ 'raw' folder successfully created at {RAW_FOLDER}{RESET}\n")
 
 print(f"{CYAN}==================================================={RESET}")
 print(f"{CYAN}HINT: Please extract the firmware into the 'raw' folder{RESET}")
 print(f"{CYAN}      in internal storage before proceeding.{RESET}")
 print(f"{CYAN}      (Location: {RAW_FOLDER}){RESET}")
-print(f"{CYAN}==================================================={RESET}")
+print(f"{CYAN}===================================================\n{RESET}")
 
 def list_files(extension):
     """List all files with a given extension in the 'raw' folder."""
@@ -38,39 +33,42 @@ def list_files(extension):
 def select_file(files, description):
     """Prompt user to select a file from a list."""
     while True:
-        print(f"{BLUE}Select a {description}:{RESET}")
+        print(f"\n{BLUE}Select a {description}:{RESET}\n")
         for i, file in enumerate(files, start=1):
             print(f"{CYAN}{i}. {file}{RESET}")
+        print("")
         choice = input("Enter the file number: ").strip()
+        print("")
         if choice.isdigit() and 1 <= int(choice) <= len(files):
             return os.path.join(RAW_FOLDER, files[int(choice) - 1])
         else:
-            print(f"{YELLOW}⚠️  Invalid selection! Please try again.{RESET}")
+            print(f"{YELLOW}⚠️  Invalid selection! Please try again.{RESET}\n")
 
 while True:
     print(f"{PURPLE}======================================{RESET}")
     print(f"{PURPLE}  ⚡ QDL Flashing Script for Termux ⚡ {RESET}")
-    print(f"{PURPLE}======================================{RESET}")
+    print(f"{PURPLE}======================================{RESET}\n")
     print(f"{BLUE}1. Flash eMMC{RESET}")
     print(f"{BLUE}2. Flash UFS{RESET}")
-    print(f"{BLUE}3. Exit{RESET}")
-    print(f"{PURPLE}======================================{RESET}")
+    print(f"{BLUE}3. Exit{RESET}\n")
+    print(f"{PURPLE}======================================{RESET}\n")
     
     option = input("Select an option (1/2/3): ").strip()
+    print("")
 
     if option in ["1", "2"]:
         break
     elif option == "3":
-        print(f"{CYAN}🔹 Exiting...{RESET}")
+        print(f"{CYAN}🔹 Exiting...{RESET}\n")
         input("Press Enter to exit...")
         exit(0)
     else:
-        print(f"{YELLOW}⚠️  Invalid selection! Please try again.{RESET}")
+        print(f"{YELLOW}⚠️  Invalid selection! Please try again.{RESET}\n")
 
 # Select firehose file
 mbn_files = list_files(".mbn")
 if not mbn_files:
-    print(f"{RED}❌ No .mbn file found in the 'raw' folder!{RESET}")
+    print(f"{RED}❌ No .mbn file found in the 'raw' folder!{RESET}\n")
     input("Press Enter to exit...")
     exit(1)
 firehose_file = select_file(mbn_files, "firehose file (.mbn)")
@@ -79,7 +77,7 @@ firehose_file = select_file(mbn_files, "firehose file (.mbn)")
 rawprogram_files = list_files(".xml")
 rawprogram_files = [f for f in rawprogram_files if "rawprogram" in f.lower()]
 if not rawprogram_files:
-    print(f"{RED}❌ No rawprogram.xml file found in the 'raw' folder!{RESET}")
+    print(f"{RED}❌ No rawprogram.xml file found in the 'raw' folder!{RESET}\n")
     input("Press Enter to exit...")
     exit(1)
 rawprogram_file = select_file(rawprogram_files, "rawprogram.xml file")
@@ -88,26 +86,26 @@ rawprogram_file = select_file(rawprogram_files, "rawprogram.xml file")
 patch_files = list_files(".xml")
 patch_files = [f for f in patch_files if "patch" in f.lower()]
 if not patch_files:
-    print(f"{RED}❌ No patch.xml file found in the 'raw' folder!{RESET}")
+    print(f"{RED}❌ No patch.xml file found in the 'raw' folder!{RESET}\n")
     input("Press Enter to exit...")
     exit(1)
 patch_file = select_file(patch_files, "patch.xml file")
 
 # Execute flashing command
 if option == "1":
-    print(f"{GREEN}[INFO] Flashing eMMC with QDL...{RESET}")
+    print(f"{GREEN}[INFO] Flashing eMMC with QDL...{RESET}\n")
     flash_command = ["./qdl", "--debug", "--storage", "emmc", "--include", firehose_file, rawprogram_file, patch_file]
 else:
-    print(f"{GREEN}[INFO] Flashing UFS with QDL...{RESET}")
+    print(f"{GREEN}[INFO] Flashing UFS with QDL...{RESET}\n")
     flash_command = ["./qdl", "--debug", "--storage", "ufs", "--include", firehose_file, rawprogram_file, patch_file]
 
 try:
     flash_result = subprocess.run(flash_command, capture_output=True, text=True)
     if "no usb device found" in flash_result.stdout.lower():
-        print(f"{RED}❌ Flashing failed, please try again.{RESET}")
+        print(f"{RED}❌ Flashing failed, please try again.{RESET}\n")
     else:
-        print(f"{GREEN}✅ Flashing completed!{RESET}")
+        print(f"{GREEN}✅ Flashing completed!{RESET}\n")
 except Exception as e:
-    print(f"{RED}❌ Error executing QDL: {e}{RESET}")
+    print(f"{RED}❌ Error executing QDL: {e}{RESET}\n")
 
-input("Press Enter to exit...")
+input("Press Enter to exit...\n")
