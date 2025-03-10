@@ -5,6 +5,8 @@ import sys
 import time
 import subprocess
 
+print("\n \033[36mChecking Roms Files !\033[0m")
+
 def check_mode():
     spinner = "|/-\\"
     message = "\r device not connected ! "
@@ -65,11 +67,13 @@ def flash_selected_result(selected_result):
                 check_mode()
                 print("\nFlashing process will start now...\n")
                 os.system(f"sh {selected_result}/{selected_file}")
+                input("\nPlease press enter to exit..")
                 exit()
             else:
                 print(f"\nInvalid choice! Please select a number between 1 and {len(found_files)}.\n")
         else:
             print("\nThe required files were not found!\n")
+            input("\nPlease press enter to exit..")
             exit()
 
 def decompress_and_flash_rom(tgz_file_name):
@@ -81,12 +85,14 @@ def decompress_and_flash_rom(tgz_file_name):
     return_code = os.system(tar_command)
     if return_code != 0:
         print(f"\nError during extraction with tar (Exit Code: {return_code})\n")
+        input("\nPlease press enter to exit..")
         exit()
 
     if os.path.exists(os.path.join(RF, "images")) and any(os.path.exists(os.path.join(RF, file)) for file in ["flash_all_lock.sh", "flash_all.sh", "flash_all_except_data_storage.sh"]):
         flash_selected_result(RF)
     else:
         print("\ninvalid tgz 'exit'\n")
+        input("\nPlease press enter to exit..")
         exit()
 
 target_extension = ".tgz"
@@ -133,3 +139,4 @@ if result_paths:
 else:
     print("\n \033[91mNo ROMs found on the device !\033[0m")
     print("\n   Please download or transfer a ROM to your device.\n")
+    input("\nPlease press enter to exit..")
