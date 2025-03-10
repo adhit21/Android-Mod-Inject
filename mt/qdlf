@@ -94,10 +94,10 @@ patch_file = select_file(patch_files, "patch.xml file")
 # Execute flashing command
 if option == "1":
     print(f"{GREEN}[INFO] Flashing eMMC with QDL...{RESET}\n")
-    flash_command = ["./qdl", "--debug", "--storage", "emmc", "--include", firehose_file, rawprogram_file, patch_file]
+    flash_command = ["qdl", "--debug", "--storage", "emmc", "--include", firehose_file, rawprogram_file, patch_file]
 else:
     print(f"{GREEN}[INFO] Flashing UFS with QDL...{RESET}\n")
-    flash_command = ["./qdl", "--debug", "--storage", "ufs", "--include", firehose_file, rawprogram_file, patch_file]
+    flash_command = ["qdl", "--debug", "--storage", "ufs", "--include", firehose_file, rawprogram_file, patch_file]
 
 try:
     flash_result = subprocess.run(flash_command, capture_output=True, text=True)
