@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-version = "1.3.1"
+version = "1.3.3"
 
 import subprocess, requests, shutil, re, sys, os, time
 from os import get_terminal_size
@@ -88,12 +88,12 @@ while True:
 7. {c5}Mi Assistant
 8. {c5}Firmware Content Extractor
 9. {c5}ADB & FASTBOOT Helper
-10. {c5}Exit
+10. {c5}EDL Flashing Tool
+11. {c5}Exit
 """
     os.system('clear')
     show_header()
     print(menu)
-    
 
     choice = input(f'{c4}Enter your choice(number): {c2}').strip().lower()
 
@@ -116,6 +116,8 @@ while True:
     elif choice == "9":
         subprocess.run("$PREFIX/bin/mi-fastboot-h", shell=True)
     elif choice == "10":
+        subprocess.run("$PREFIX/bin/qdlf", shell=True)
+    elif choice == "11":
         print(f"{c5}Exiting MiTool...{c2}")
         loading_animation("Closing")
         os.system('clear')
@@ -133,4 +135,3 @@ while True:
             sys.stdout.flush()
             time.sleep(0.5)
         print(f"\r{c4}Invalid choice! Please enter a valid option.{c2}\n")
-        
